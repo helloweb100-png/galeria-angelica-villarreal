@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Galería Angélica Villarreal | Arte en San Buenaventura, Coahuila</title>
+  <meta name="description" content="Galería de arte en San Buenaventura, Coahuila: exhibición permanente de la artista Ma. Alicia González Garza, con 40 años de trayectoria y 400 obras. Agenda tu visita.">
+  <meta name="theme-color" content="#F7F2E6">
+  <meta name="color-scheme" content="light">
+
+  <!-- Open Graph / redes -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_MX">
+  <meta property="og:site_name" content="Galería de Arte Angélica Villarreal">
+  <meta property="og:title" content="Galería Angélica Villarreal | Arte en San Buenaventura, Coahuila">
+  <meta property="og:description" content="Exhibición permanente de la artista Ma. Alicia González Garza: 40 años pintando, 400 obras y una galería que se recorre despacio.">
+  <meta property="og:image" content="assets/img/logo-dorado.jpg">
+  <meta property="og:image:alt" content="Logotipo de la Galería de Arte Angélica Villarreal, San Buenaventura, Coahuila">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Favicon: monograma AV en SVG (derivado del logotipo) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23F7F2E6' stroke='%23C9922E' stroke-width='3'/%3E%3Ccircle cx='32' cy='32' r='24' fill='none' stroke='%23C9922E' stroke-width='1' stroke-dasharray='1.5 2.5'/%3E%3Ctext x='32' y='41' text-anchor='middle' font-family='Georgia,serif' font-size='25' font-style='italic' font-weight='700' fill='%2324252B'%3EAV%3C/text%3E%3C/svg%3E">
+
+  <!-- Tipografías: Cinzel (rótulos, como el logotipo), Cormorant Garamond (titulares editoriales), Jost (interfaz) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Bandera "js": los estados ocultos de las animaciones solo existen si hay JavaScript.
+       Si el script principal no arranca en 4.5 s, se quita y todo el contenido queda visible. -->
+  <script>
+    (function () {
+      var d = document.documentElement;
+      try {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { d.classList.add('reduce'); }
+        else { d.classList.add('js'); window.__avT = setTimeout(function () { d.classList.remove('js'); }, 4500); }
+      } catch (e) {}
+    })();
+  </script>
+
+  <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ArtGallery",
+    "name": "Galería de Arte Angélica Villarreal",
+    "description": "Galería de arte en San Buenaventura, Coahuila, con la exhibición permanente de la artista Ma. Alicia González Garza: 40 años de trayectoria y 400 obras.",
+    "image": "assets/img/logo-dorado.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "San Buenaventura",
+      "addressRegion": "Coahuila",
+      "addressCountry": "MX"
+    },
+    "knowsAbout": ["Pintura", "Viacrucis", "Flor del desierto", "Bodegones", "Arte abstracto", "Arte sacro"]
+  }
+  </script>
+
+  <!-- anime.js (versión fija, desde cdnjs). La página funciona completa si no carga. -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js"></script>
+  <script defer src="script.js"></script>
+</head>
+
+<body>
+  <a class="skip" href="#contenido">Saltar al contenido</a>
+  <div class="progress" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"><span>Ver</span></div>
+
+  <!-- ============ CARGADOR ============ -->
+  <div class="loader" id="loader" role="status" aria-live="polite" aria-label="Cargando la galería">
+    <div class="loader__panel loader__panel--t"></div>
+    <div class="loader__panel loader__panel--b"></div>
+    <div class="loader__core">
+      <div class="loader__seal">
+        <span class="seal" role="img" aria-label="Monograma de la Galería Angélica Villarreal"></span>
+        <svg class="loader__ring" viewBox="0 0 220 220" aria-hidden="true" focusable="false">
+          <circle class="loader__track" cx="110" cy="110" r="102"/>
+          <circle class="loader__arc" id="loaderArc" cx="110" cy="110" r="102"/>
+        </svg>
+        <svg class="loader__spin" viewBox="0 0 220 220" aria-hidden="true" focusable="false">
+          <circle cx="110" cy="110" r="106"/>
+        </svg>
+      </div>
+      <p class="loader__name">Angélica Villarreal</p>
+      <p class="loader__sub">Galería de arte · abriendo la sala</p>
+      <p class="loader__count"><span id="loaderNum">0</span><small>%</small></p>
+    </div>
+  </div>
+
+  <!-- ============ ENCABEZADO ============ -->
+  <header class="site-header" id="top">
+    <a class="brand" href="#inicio" aria-label="Galería Angélica Villarreal, ir al inicio">
+      <span class="seal seal--sm" aria-hidden="true"></span>
+      <span class="brand__txt"><b>Angélica Villarreal</b><small>Galería de arte</small></span>
+    </a>
+
+    <nav class="nav" id="menu" aria-label="Principal">
+      <ul>
+        <li><a href="#galeria">La galería</a></li>
+        <li><a href="#artista">La artista</a></li>
+        <li><a href="#series">Series</a></li>
+        <li><a href="#obras">Obras</a></li>
+        <li><a href="#visita">Visita</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <a class="btn btn--gold nav__cta" href="#contacto" data-wa="Hola, quiero visitar la exhibición de la Galería Angélica Villarreal. ¿Me ayudan a coordinar mi visita?">Quiero visitarla</a>
+    </nav>
+
+    <a class="btn btn--gold btn--sm header-cta" href="#contacto" data-wa="Hola, quiero visitar la exhibición de la Galería Angélica Villarreal. ¿Me ayudan a coordinar mi visita?">Quiero visitarla</a>
+
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <main id="contenido">
+
+    <!-- ============ 1. HERO ============ -->
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <canvas class="dust" id="dustHero" aria-hidden="true"></canvas>
+
+      <div class="hero__bg" aria-hidden="true">
+        <span class="glow glow--a"></span>
+        <span class="glow glow--b"></span>
+        <!-- Anillos ornamentales giratorios: eco del medallón del logotipo -->
+        <svg class="rings" viewBox="0 0 800 800" focusable="false">
+          <g class="ring ring--1">
+            <circle cx="400" cy="400" r="392" fill="none" stroke="currentColor" stroke-width="1"/>
+            <circle cx="400" cy="400" r="380" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="1 15" stroke-linecap="round"/>
+          </g>
+          <g class="ring ring--2">
+            <circle cx="400" cy="400" r="340" fill="none" stroke="currentColor" stroke-width="1.2" stroke-dasharray="40 14 4 14"/>
+            <circle cx="400" cy="400" r="326" fill="none" stroke="currentColor" stroke-width=".8"/>
+          </g>
+          <g class="ring ring--3" fill="currentColor">
+            <ellipse class="leaf" style="--i:0"  cx="400" cy="112" rx="7" ry="22"/>
+            <ellipse class="leaf" style="--i:1"  cx="400" cy="112" rx="7" ry="22" transform="rotate(20 400 400)"/>
+            <ellipse class="leaf" style="--i:2"  cx="400" cy="112" rx="7" ry="22" transform="rotate(40 400 400)"/>
+            <ellipse class="leaf" style="--i:3"  cx="400" cy="112" rx="7" ry="22" transform="rotate(60 400 400)"/>
+            <ellipse class="leaf" style="--i:4"  cx="400" cy="112" rx="7" ry="22" transform="rotate(80 400 400)"/>
+            <ellipse class="leaf" style="--i:5"  cx="400" cy="112" rx="7" ry="22" transform="rotate(100 400 400)"/>
+            <ellipse class="leaf" style="--i:6"  cx="400" cy="112" rx="7" ry="22" transform="rotate(120 400 400)"/>
+            <ellipse class="leaf" style="--i:7"  cx="400" cy="112" rx="7" ry="22" transform="rotate(140 400 400)"/>
+            <ellipse class="leaf" style="--i:8"  cx="400" cy="112" rx="7" ry="22" transform="rotate(160 400 400)"/>
+            <ellipse class="leaf" style="--i:9"  cx="400" cy="112" rx="7" ry="22" transform="rotate(180 400 400)"/>
+            <ellipse class="leaf" style="--i:10" cx="400" cy="112" rx="7" ry="22" transform="rotate(200 400 400)"/>
+            <ellipse class="leaf" style="--i:11" cx="400" cy="112" rx="7" ry="22" transform="rotate(220 400 400)"/>
+            <ellipse class="leaf" style="--i:12" cx="400" cy="112" rx="7" ry="22" transform="rotate(240 400 400)"/>
+            <ellipse class="leaf" style="--i:13" cx="400" cy="112" rx="7" ry="22" transform="rotate(260 400 400)"/>
+            <ellipse class="leaf" style="--i:14" cx="400" cy="112" rx="7" ry="22" transform="rotate(280 400 400)"/>
+            <ellipse class="leaf" style="--i:15" cx="400" cy="112" rx="7" ry="22" transform="rotate(300 400 400)"/>
+            <ellipse class="leaf" style="--i:16" cx="400" cy="112" rx="7" ry="22" transform="rotate(320 400 400)"/>
+            <ellipse class="leaf" style="--i:17" cx="400" cy="112" rx="7" ry="22" transform="rotate(340 400 400)"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <h1 class="hero__title" id="hero-title">
+            <span class="hero__kicker rv">Angélica Villarreal · Galería de arte en San Buenaventura, Coahuila</span>
+            <span class="line"><span>Cuarenta años</span></span>
+            <span class="line"><span>de pintura que</span></span>
+            <span class="line"><span><em>te mira de vuelta.</em></span></span>
+          </h1>
+          <p class="hero__lead rv" style="--d:.55">Entra a la exhibición permanente de la artista Ma. Alicia González Garza: cuatrocientas obras, del Viacrucis a Van Gogh, y una sala que se recorre despacio.</p>
+          <div class="hero__cta rv" style="--d:.7">
+            <a class="btn btn--gold" href="#contacto" data-wa="Hola, quiero recorrer la exhibición de la Galería Angélica Villarreal. ¿Cómo puedo coordinar mi visita?">Quiero recorrer la exhibición
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a class="btn btn--ghost" href="#obras">Ver las obras</a>
+          </div>
+        </div>
+
+        <div class="hero__stage" data-stage>
+          <div class="stage">
+            <figure class="piece piece--a" style="--i:0">
+              <span class="frame v-ola"><span class="crop"><img src="assets/img/obra-ola-azul.jpg" width="1493" height="1026" alt="Pintura abstracta de una ola azul que se curva formando un túnel de luz, con pinceladas blancas y azules" decoding="async" fetchpriority="high"></span></span>
+            </figure>
+            <figure class="piece piece--b" style="--i:1">
+              <span class="frame v-virgen" style="--sd:1.5s"><span class="crop"><img src="assets/img/obra-virgen-desierto.jpg" width="1204" height="1600" alt="Pintura de una figura con manto turquesa y vestido rosa junto a un hombre arrodillado y un nopal, bajo un sol de espirales naranjas" decoding="async"></span></span>
+            </figure>
+            <figure class="piece piece--c" style="--i:2">
+              <span class="frame v-maiz" style="--sd:3s"><span class="crop"><img src="assets/img/obra-maiz.jpg" width="1600" height="1204" alt="Pintura de mazorcas de maíz con hojas doradas en movimiento sobre un fondo durazno" decoding="async"></span></span>
+            </figure>
+          </div>
+        </div>
+      </div>
+
+      <ul class="hero__stats rv" style="--d:.9" aria-label="La galería en cifras">
+        <li><strong><span data-count="40">40</span></strong><span>años<br>pintando</span></li>
+        <li><strong><span data-count="400">400</span></strong><span>obras<br>creadas</span></li>
+        <li><strong>1</strong><span>exhibición<br>permanente</span></li>
+      </ul>
+
+      <a class="scrollcue" href="#galeria" aria-label="Bajar a la siguiente sección"><i></i></a>
+    </section>
+
+    <!-- ============ CINTA DE SERIES ============ -->
+    <div class="marquee" aria-label="Series de la exhibición: Viacrucis, Flor del desierto, Van Gogh, Bodegones, Abstracto y Sacro">
+      <div class="marquee__track" aria-hidden="true">
+        <div class="marquee__group">
+          <span>Viacrucis</span><i>✦</i><span>Flor del desierto</span><i>✦</i><span>Van Gogh</span><i>✦</i><span>Bodegones</span><i>✦</i><span>Abstracto</span><i>✦</i><span>Sacro</span><i>✦</i>
+        </div>
+        <div class="marquee__group">
+          <span>Viacrucis</span><i>✦</i><span>Flor del desierto</span><i>✦</i><span>Van Gogh</span><i>✦</i><span>Bodegones</span><i>✦</i><span>Abstracto</span><i>✦</i><span>Sacro</span><i>✦</i>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ 2. MANIFIESTO ============ -->
+    <section class="section manifesto" id="galeria" aria-labelledby="galeria-t">
+      <div class="container">
+        <p class="eyebrow rv">La galería</p>
+        <h2 class="sr-only" id="galeria-t">Una galería donde la pintura respira</h2>
+        <p class="manifesto__text" data-words>Aquí la pintura no cuelga: respira. Cada obra nace de cuarenta años de oficio y espera a quien se detenga lo suficiente para escucharla.</p>
+
+        <svg class="brush" viewBox="0 0 480 60" aria-hidden="true" focusable="false">
+          <path d="M4 40 C 70 6, 140 70, 220 32 S 380 6, 476 44" pathLength="1" fill="none" stroke="url(#brushGrad)" stroke-width="5" stroke-linecap="round"/>
+          <defs><linearGradient id="brushGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#E6B661"/><stop offset=".5" stop-color="#C9922E"/><stop offset="1" stop-color="#8F6118"/></linearGradient></defs>
+        </svg>
+
+        <div class="manifesto__cols">
+          <article class="fact rv">
+            <h3>Exhibición permanente</h3>
+            <p>La obra de Ma. Alicia González Garza tiene casa propia en San Buenaventura, Coahuila.</p>
+          </article>
+          <article class="fact rv" style="--d:.12">
+            <h3>Del Viacrucis a Van Gogh</h3>
+            <p>Series sacras, bodegones, abstracto, flores del desierto y homenajes al maestro holandés.</p>
+          </article>
+          <article class="fact rv" style="--d:.24">
+            <h3>Pintura para mirar de cerca</h3>
+            <p>Texturas, relieves y pinceladas que solo se entienden frente al lienzo.</p>
+          </article>
+        </div>
+
+        <div class="manifesto__cta rv">
+          <a class="btn btn--dark" href="#contacto" data-wa="Hola, quiero ver la exhibición de la Galería Angélica Villarreal en persona. ¿Cuándo puedo ir?">Quiero verla en persona</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 3. TELÓN: la imagen se abre en grande al hacer scroll ============ -->
+    <section class="telon" id="telon" data-telon aria-labelledby="telon-t">
+      <div class="telon__sticky">
+        <div class="telon__ghost" aria-hidden="true">ENTRA</div>
+        <div class="telon__img">
+          <img src="assets/img/obra-cosmos-escalera.jpg" width="1465" height="762" alt="Pintura de una galaxia en espiral sobre un campo de llamas, con una escalera dorada que sube hacia una luz brillante" loading="lazy" decoding="async">
+        </div>
+        <div class="telon__veil" aria-hidden="true"></div>
+        <div class="telon__txt">
+          <p class="chip">Obra destacada</p>
+          <h2 id="telon-t">Cada lienzo<br>es una puerta.</h2>
+          <p class="telon__cap">Escalera de luz · Ma. Alicia González Garza</p>
+          <a class="btn btn--gold" href="#contacto" data-wa="Hola, me interesa la obra “Escalera de luz” que vi en la página de la Galería Angélica Villarreal. ¿Me comparten información?">Quiero saber de esta obra</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 4. LA ARTISTA ============ -->
+    <section class="section artist" id="artista" aria-labelledby="artista-t">
+      <div class="container artist__grid">
+        <div class="artist__copy">
+          <p class="eyebrow rv">La artista</p>
+          <h2 class="h2 rv" id="artista-t" style="--d:.08">Ma. Alicia<br>González Garza</h2>
+          <p class="lead rv" style="--d:.16">La galería Angélica Villarreal abre sus salas a la exhibición permanente de Ma. Alicia González Garza: cuatro décadas frente al lienzo y cuatrocientas obras que transitan entre lo sagrado, lo cotidiano y lo imaginado.</p>
+          <p class="rv" style="--d:.24">Del Viacrucis a las flores del desierto, de los bodegones a la abstracción y a su diálogo con Vincent van Gogh, su pintura no busca decorar una pared: busca quedarse contigo.</p>
+          <ul class="facts rv" style="--d:.3">
+            <li><b>40</b><span>años de trayectoria</span></li>
+            <li><b>400</b><span>obras pintadas</span></li>
+            <li><b>1</b><span>exhibición permanente</span></li>
+          </ul>
+          <div class="rv" style="--d:.36">
+            <a class="btn btn--gold" href="#contacto" data-wa="Hola, quiero conocer de cerca la obra de Ma. Alicia González Garza en la Galería Angélica Villarreal.">Quiero conocer su obra de cerca</a>
+          </div>
+        </div>
+
+        <div class="artist__art rv" style="--d:.1">
+          <p class="hint"><i></i>Toca los puntos dorados y mira la obra como la miraría un curador</p>
+          <div class="artist__frame" data-tilt>
+            <span class="frame v-quijote">
+              <span class="crop"><img src="assets/img/obra-quijote-sancho.jpg" width="1204" height="1600" alt="Pintura de Don Quijote a caballo y Sancho Panza con su burro, con un molino al fondo" loading="lazy" decoding="async"></span>
+            </span>
+            <div class="hs-layer">
+              <button class="hs" type="button" style="left:35%;top:25%" aria-expanded="false" aria-label="Detalle: el caballero">
+                <i></i>
+                <span class="hs__tip"><b>El caballero</b>Una figura casi evaporada en pincelada clara, como si el aire también lo pintara.</span>
+              </button>
+              <button class="hs" type="button" style="left:67%;top:49%" aria-expanded="false" aria-label="Detalle: Sancho Panza">
+                <i></i>
+                <span class="hs__tip"><b>Sancho Panza</b>Tonos tierra y ocre: más cerca del suelo y de la gente.</span>
+              </button>
+              <button class="hs hs--l" type="button" style="left:87%;top:37%" aria-expanded="false" aria-label="Detalle: el molino">
+                <i></i>
+                <span class="hs__tip"><b>El molino</b>Apenas sugerido al fondo: la ilusión que el caballero persigue.</span>
+              </button>
+            </div>
+          </div>
+          <p class="caption">Don Quijote y Sancho Panza · Ma. Alicia González Garza</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. SERIES: recorrido horizontal con scroll ============ -->
+    <section class="series night" id="series" data-pin aria-labelledby="series-t">
+      <div class="series__sticky">
+        <header class="series__head">
+          <p class="eyebrow eyebrow--gold">Las series</p>
+          <h2 class="h2" id="series-t">Seis caminos, <em>una sola mano.</em></h2>
+          <p class="series__hint"><span>Sigue bajando</span> y la sala se desliza hacia un lado</p>
+        </header>
+
+        <div class="series__track" data-track>
+
+          <!-- I · Viacrucis -->
+          <article class="card" aria-labelledby="s-via">
+            <div class="card__art">
+              <span class="frame" style="--arn:.8">
+                <svg class="art" viewBox="0 0 400 500" role="img" aria-label="Composición gráfica de la serie Viacrucis: un camino punteado dorado sube hacia una cruz luminosa sobre un cielo rojo oscuro">
+                  <defs>
+                    <linearGradient id="gv-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1f0d12"/><stop offset=".55" stop-color="#5c1a20"/><stop offset="1" stop-color="#a9472a"/></linearGradient>
+                    <linearGradient id="gv-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f6dc9c"/><stop offset=".5" stop-color="#d9a441"/><stop offset="1" stop-color="#9a6a1f"/></linearGradient>
+                    <radialGradient id="gv-halo" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#f3d58f" stop-opacity=".9"/><stop offset="1" stop-color="#f3d58f" stop-opacity="0"/></radialGradient>
+                  </defs>
+                  <rect width="400" height="500" fill="url(#gv-bg)"/>
+                  <circle class="art__halo" cx="200" cy="150" r="140" fill="url(#gv-halo)"/>
+                  <g class="art__rays" stroke="#f3d58f" stroke-opacity=".32" stroke-width="1.2">
+                    <line x1="200" y1="150" x2="200" y2="-120"/>
+                    <line x1="200" y1="150" x2="200" y2="-120" transform="rotate(30 200 150)"/>
+                    <line x1="200" y1="150" x2="200" y2="-120" transform="rotate(60 200 150)"/>
+                    <line x1="200" y1="150" x2="200" y2="-120" transform="rotate(90 200 150)"/>
+                    <line x1="200" y1="150" x2="200" y2="-120" transform="rotate(120 200 150)"/>
+                    <line x1="200" y1="150" x2="200" y2="-120" transform="rotate(150 200 150)"/>
+                    <line x1="200" y1="150" x2="200" y2="-120" transform="rotate(180 200 150)"/>
+                    <line x1="200" y1="150" x2="200" y2="-120" transform="rotate(210 200 150)"/>
+                    <line x1="200" y1="150" x2="200" y2="-120" transform="rotate(240 200 150)"/>
+                    <line x1="200" y1="150" x2="200" y2="-120" transform="rotate(270 200 150)"/>
+                    <line x1="200" y1="150" x2="200" y2="-120" transform="rotate(300 200 150)"/>
+                    <line x1="200" y1="150" x2="200" y2="-120" transform="rotate(330 200 150)"/>
+                  </g>
+                  <path d="M0 500V440C90 405 150 445 220 425S350 405 400 435V500Z" fill="#1a0b0f" opacity=".75"/>
+                  <path class="art__road" d="M70 500C70 440 330 450 300 392S90 352 160 304S250 272 200 240" fill="none" stroke="#f3d58f" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 14"/>
+                  <rect x="192" y="76" width="16" height="156" fill="url(#gv-gold)"/>
+                  <rect x="146" y="120" width="108" height="16" fill="url(#gv-gold)"/>
+                </svg>
+              </span>
+            </div>
+            <div class="card__body">
+              <h3 id="s-via"><span class="card__num" aria-hidden="true">I</span>Viacrucis</h3>
+              <p>Estación por estación, el camino del Viacrucis llevado al lienzo con toda la intensidad del pincel.</p>
+              <a class="link-arrow" href="#contacto" data-wa="Hola, me interesa la serie Viacrucis de la Galería Angélica Villarreal. ¿Me comparten información?">Quiero conocer esta serie</a>
+            </div>
+          </article>
+
+          <!-- II · Flor del desierto -->
+          <article class="card" aria-labelledby="s-flor">
+            <div class="card__art">
+              <span class="frame" style="--arn:.8">
+                <svg class="art" viewBox="0 0 400 500" role="img" aria-label="Composición gráfica de la serie Flor del desierto: una flor de pétalos rosados y dorados frente a un sol y dunas al atardecer">
+                  <defs>
+                    <linearGradient id="gf-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7c9a0"/><stop offset=".5" stop-color="#f0a06a"/><stop offset="1" stop-color="#c8627a"/></linearGradient>
+                    <radialGradient id="gf-sun" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff3cf"/><stop offset=".55" stop-color="#ffd37a"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient>
+                  </defs>
+                  <rect width="400" height="500" fill="url(#gf-bg)"/>
+                  <circle class="art__halo" cx="200" cy="165" r="135" fill="url(#gf-sun)"/>
+                  <path d="M0 350C100 312 180 346 262 326S370 316 400 336V500H0Z" fill="#d5805f"/>
+                  <path d="M0 405C120 372 220 414 400 380V500H0Z" fill="#a8506a"/>
+                  <path d="M200 340V500" stroke="#3f7a4a" stroke-width="9" stroke-linecap="round"/>
+                  <ellipse cx="150" cy="450" rx="30" ry="46" fill="#4f8f58" transform="rotate(-24 150 450)"/>
+                  <ellipse cx="252" cy="455" rx="26" ry="40" fill="#3f7a4a" transform="rotate(22 252 455)"/>
+                  <g transform="translate(200 330)">
+                    <g class="art__spin">
+                      <ellipse cx="0" cy="-48" rx="15" ry="48" fill="#f5a3b8"/>
+                      <ellipse cx="0" cy="-48" rx="15" ry="48" fill="#f5a3b8" transform="rotate(30)"/>
+                      <ellipse cx="0" cy="-48" rx="15" ry="48" fill="#f5a3b8" transform="rotate(60)"/>
+                      <ellipse cx="0" cy="-48" rx="15" ry="48" fill="#f5a3b8" transform="rotate(90)"/>
+                      <ellipse cx="0" cy="-48" rx="15" ry="48" fill="#f5a3b8" transform="rotate(120)"/>
+                      <ellipse cx="0" cy="-48" rx="15" ry="48" fill="#f5a3b8" transform="rotate(150)"/>
+                      <ellipse cx="0" cy="-48" rx="15" ry="48" fill="#f5a3b8" transform="rotate(180)"/>
+                      <ellipse cx="0" cy="-48" rx="15" ry="48" fill="#f5a3b8" transform="rotate(210)"/>
+                      <ellipse cx="0" cy="-48" rx="15" ry="48" fill="#f5a3b8" transform="rotate(240)"/>
+                      <ellipse cx="0" cy="-48" rx="15" ry="48" fill="#f5a3b8" transform="rotate(270)"/>
+                      <ellipse cx="0" cy="-48" rx="15" ry="48" fill="#f5a3b8" transform="rotate(300)"/>
+                      <ellipse cx="0" cy="-48" rx="15" ry="48" fill="#f5a3b8" transform="rotate(330)"/>
+                    </g>
+                    <g class="art__spin art__spin--r">
+                      <ellipse cx="0" cy="-30" rx="10" ry="30" fill="#ffd37a" transform="rotate(15)"/>
+                      <ellipse cx="0" cy="-30" rx="10" ry="30" fill="#ffd37a" transform="rotate(75)"/>
+                      <ellipse cx="0" cy="-30" rx="10" ry="30" fill="#ffd37a" transform="rotate(135)"/>
+                      <ellipse cx="0" cy="-30" rx="10" ry="30" fill="#ffd37a" transform="rotate(195)"/>
+                      <ellipse cx="0" cy="-30" rx="10" ry="30" fill="#ffd37a" transform="rotate(255)"/>
+                      <ellipse cx="0" cy="-30" rx="10" ry="30" fill="#ffd37a" transform="rotate(315)"/>
+                    </g>
+                    <circle r="15" fill="#8a3b57"/>
+                  </g>
+                </svg>
+              </span>
+            </div>
+            <div class="card__body">
+              <h3 id="s-flor"><span class="card__num" aria-hidden="true">II</span>Flor del desierto</h3>
+              <p>El desierto también florece: color, espina y luz en una colección que huele a tierra caliente.</p>
+              <a class="link-arrow" href="#contacto" data-wa="Hola, me interesa la colección Flor del desierto de la Galería Angélica Villarreal. ¿Me comparten información?">Quiero conocer esta serie</a>
+            </div>
+          </article>
+
+          <!-- III · Van Gogh -->
+          <article class="card" aria-labelledby="s-vg">
+            <div class="card__art">
+              <span class="frame" style="--arn:.8">
+                <svg class="art" viewBox="0 0 400 500" role="img" aria-label="Composición gráfica de la serie Van Gogh: remolinos amarillos y azules sobre un cielo nocturno con estrellas y una luna creciente">
+                  <defs>
+                    <linearGradient id="gg-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b1838"/><stop offset=".6" stop-color="#1b3a80"/><stop offset="1" stop-color="#2b5aa8"/></linearGradient>
+                    <radialGradient id="gg-star" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fff6c8"/><stop offset=".4" stop-color="#ffe27a" stop-opacity=".85"/><stop offset="1" stop-color="#ffe27a" stop-opacity="0"/></radialGradient>
+                  </defs>
+                  <rect width="400" height="500" fill="url(#gg-bg)"/>
+                  <g transform="translate(140 190)">
+                    <g class="art__spin art__spin--slow">
+                      <circle r="18" fill="none" stroke="#ffe27a" stroke-width="7" stroke-dasharray="40 14" stroke-linecap="round"/>
+                      <circle r="34" fill="none" stroke="#8fb8ff" stroke-width="8" stroke-dasharray="70 22" stroke-linecap="round"/>
+                      <circle r="50" fill="none" stroke="#fff1b8" stroke-width="6" stroke-dasharray="55 30" stroke-linecap="round"/>
+                      <circle r="66" fill="none" stroke="#4f7fd6" stroke-width="9" stroke-dasharray="110 36" stroke-linecap="round"/>
+                      <circle r="84" fill="none" stroke="#ffe27a" stroke-width="5" stroke-dasharray="60 48" stroke-linecap="round"/>
+                    </g>
+                  </g>
+                  <g transform="translate(285 285)">
+                    <g class="art__spin art__spin--r">
+                      <circle r="14" fill="none" stroke="#fff1b8" stroke-width="6" stroke-dasharray="30 12" stroke-linecap="round"/>
+                      <circle r="28" fill="none" stroke="#ffe27a" stroke-width="7" stroke-dasharray="52 18" stroke-linecap="round"/>
+                      <circle r="44" fill="none" stroke="#8fb8ff" stroke-width="7" stroke-dasharray="80 26" stroke-linecap="round"/>
+                    </g>
+                  </g>
+                  <circle class="art__star" cx="60" cy="70" r="16" fill="url(#gg-star)"/>
+                  <circle class="art__star" cx="330" cy="60" r="20" fill="url(#gg-star)" style="--sd:-1s"/>
+                  <circle class="art__star" cx="250" cy="130" r="12" fill="url(#gg-star)" style="--sd:-2s"/>
+                  <circle class="art__star" cx="60" cy="330" r="13" fill="url(#gg-star)" style="--sd:-1.5s"/>
+                  <circle class="art__star" cx="360" cy="190" r="11" fill="url(#gg-star)" style="--sd:-.5s"/>
+                  <path d="M330 120a34 34 0 1 0 22 54a28 28 0 1 1-22-54Z" fill="#ffe27a" opacity=".92" transform="translate(-24 4)"/>
+                  <path d="M60 500C54 420 88 350 78 270C116 346 108 430 118 500Z" fill="#0a1420"/>
+                  <path d="M0 500V455C80 430 160 470 240 452S350 440 400 462V500Z" fill="#0a1426"/>
+                </svg>
+              </span>
+            </div>
+            <div class="card__body">
+              <h3 id="s-vg"><span class="card__num" aria-hidden="true">III</span>Van Gogh</h3>
+              <p>Representación de obras de Vincent van Gogh: la artista conversa con el maestro, pincelada a pincelada.</p>
+              <a class="link-arrow" href="#contacto" data-wa="Hola, me interesa la serie de representación de obras de Van Gogh de la Galería Angélica Villarreal. ¿Me comparten información?">Quiero conocer esta serie</a>
+            </div>
+          </article>
+
+          <!-- IV · Bodegones -->
+          <article class="card" aria-labelledby="s-bod">
+            <div class="card__art">
+              <button class="art-btn" type="button" data-obra="bodegon" aria-label="Ver en grande: Bodegón de flores y luz">
+                <span class="frame v-bodegon"><span class="crop"><img src="assets/img/obra-bodegon-flores.jpg" width="1189" height="1423" alt="Bodegón pintado con flores naranjas y amarillas en un jarrón azul, junto a formas cálidas y llamas" loading="lazy" decoding="async"></span></span>
+              </button>
+            </div>
+            <div class="card__body">
+              <h3 id="s-bod"><span class="card__num" aria-hidden="true">IV</span>Bodegones</h3>
+              <p>Flores, jarrones y llamas pintadas con empaste generoso: la vida quieta que nunca se queda quieta.</p>
+              <a class="link-arrow" href="#contacto" data-wa="Hola, me interesa la serie Bodegones de la Galería Angélica Villarreal. ¿Me comparten información?">Quiero conocer esta serie</a>
+            </div>
+          </article>
+
+          <!-- V · Abstracto -->
+          <article class="card" aria-labelledby="s-abs">
+            <div class="card__art">
+              <button class="art-btn" type="button" data-obra="ola" aria-label="Ver en grande: Ola azul">
+                <span class="frame v-ola"><span class="crop"><img src="assets/img/obra-ola-azul.jpg" width="1493" height="1026" alt="Pintura abstracta de una ola azul que se curva formando un túnel de luz, con pinceladas blancas y azules" loading="lazy" decoding="async"></span></span>
+              </button>
+            </div>
+            <div class="card__body">
+              <h3 id="s-abs"><span class="card__num" aria-hidden="true">V</span>Abstracto</h3>
+              <p>Movimiento, azul y gesto libre: obras que no explican, sino que te sumergen.</p>
+              <a class="link-arrow" href="#contacto" data-wa="Hola, me interesa la serie Abstracto de la Galería Angélica Villarreal. ¿Me comparten información?">Quiero conocer esta serie</a>
+            </div>
+          </article>
+
+          <!-- VI · Sacro -->
+          <article class="card" aria-labelledby="s-sac">
+            <div class="card__art">
+              <button class="art-btn" type="button" data-obra="virgen" aria-label="Ver en grande: Aparición en el desierto">
+                <span class="frame v-virgen"><span class="crop"><img src="assets/img/obra-virgen-desierto.jpg" width="1204" height="1600" alt="Pintura de una figura con manto turquesa y vestido rosa junto a un hombre arrodillado y un nopal, bajo un sol de espirales naranjas" loading="lazy" decoding="async"></span></span>
+              </button>
+            </div>
+            <div class="card__body">
+              <h3 id="s-sac"><span class="card__num" aria-hidden="true">VI</span>Sacro</h3>
+              <p>Fe y paisaje del norte: escenas sagradas que se viven bajo un sol de espirales.</p>
+              <a class="link-arrow" href="#contacto" data-wa="Hola, me interesa la serie Sacro de la Galería Angélica Villarreal. ¿Me comparten información?">Quiero conocer esta serie</a>
+            </div>
+          </article>
+
+          <!-- Cierre del recorrido -->
+          <article class="card card--end" aria-labelledby="s-fin">
+            <div class="card__endbox">
+              <p class="eyebrow eyebrow--gold">¿Cuál te llamó?</p>
+              <h3 id="s-fin">Cuéntanos y te guiamos por la sala.</h3>
+              <a class="btn btn--gold" href="#contacto" data-wa="Hola, vi las series de la Galería Angélica Villarreal y quiero que me orienten sobre la que más me llamó la atención.">Estoy listo para conocerla</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="series__bar" aria-hidden="true"><i></i></div>
+      </div>
+    </section>
+
+    <!-- ============ 6. SALA DE OBRAS ============ -->
+    <section class="section obras" id="obras" aria-labelledby="obras-t">
+      <div class="container">
+        <header class="obras__head">
+          <p class="eyebrow rv">Sala principal</p>
+          <h2 class="h2 rv" id="obras-t" style="--d:.08">Obras que se miran <em>despacio.</em></h2>
+          <p class="lead rv" style="--d:.16">Toca cualquier pieza para verla en grande. Si una te detiene, pregúntanos por ella.</p>
+        </header>
+
+        <div class="obras__grid">
+          <figure class="work work--1 rv" data-tilt>
+            <button class="work__btn" type="button" data-obra="cosmos" data-titulo="Escalera de luz" data-desc="Una galaxia en espiral sobre un campo de llamas, y una escalera dorada que sube hacia la luz." aria-label="Ver en grande: Escalera de luz">
+              <span class="frame v-cosmos"><span class="crop"><img src="assets/img/obra-cosmos-escalera.jpg" width="1465" height="762" alt="Pintura de una galaxia en espiral sobre un campo de llamas, con una escalera dorada que sube hacia una luz brillante" loading="lazy" decoding="async"></span></span>
+            </button>
+            <figcaption><b>Escalera de luz</b><span>Ma. Alicia González Garza</span></figcaption>
+          </figure>
+
+          <figure class="work work--2 rv" style="--d:.1" data-tilt>
+            <button class="work__btn" type="button" data-obra="bodegon" data-titulo="Bodegón de flores y luz" data-desc="Flores naranjas y amarillas en un jarrón azul, acompañadas de formas cálidas y llamas que se elevan." aria-label="Ver en grande: Bodegón de flores y luz">
+              <span class="frame v-bodegon"><span class="crop"><img src="assets/img/obra-bodegon-flores.jpg" width="1189" height="1423" alt="Bodegón pintado con flores naranjas y amarillas en un jarrón azul, junto a formas cálidas y llamas" loading="lazy" decoding="async"></span></span>
+            </button>
+            <figcaption><b>Bodegón de flores y luz</b><span>Ma. Alicia González Garza</span></figcaption>
+          </figure>
+
+          <figure class="work work--3 rv" data-tilt>
+            <button class="work__btn" type="button" data-obra="virgen" data-titulo="Aparición en el desierto" data-desc="Una figura de manto turquesa y un hombre arrodillado junto al nopal, bajo un sol de espirales naranjas." aria-label="Ver en grande: Aparición en el desierto">
+              <span class="frame v-virgen"><span class="crop"><img src="assets/img/obra-virgen-desierto.jpg" width="1204" height="1600" alt="Pintura de una figura con manto turquesa y vestido rosa junto a un hombre arrodillado y un nopal, bajo un sol de espirales naranjas" loading="lazy" decoding="async"></span></span>
+            </button>
+            <figcaption><b>Aparición en el desierto</b><span>Ma. Alicia González Garza</span></figcaption>
+          </figure>
+
+          <figure class="work work--4 rv" style="--d:.1" data-tilt>
+            <button class="work__btn" type="button" data-obra="ola" data-titulo="Ola azul" data-desc="Un oleaje que se curva hasta formar un túnel de luz: azules, blancos y movimiento puro." aria-label="Ver en grande: Ola azul">
+              <span class="frame v-ola"><span class="crop"><img src="assets/img/obra-ola-azul.jpg" width="1493" height="1026" alt="Pintura abstracta de una ola azul que se curva formando un túnel de luz, con pinceladas blancas y azules" loading="lazy" decoding="async"></span></span>
+            </button>
+            <figcaption><b>Ola azul</b><span>Ma. Alicia González Garza</span></figcaption>
+          </figure>
+
+          <figure class="work work--5 rv" data-tilt>
+            <button class="work__btn" type="button" data-obra="quijote" data-titulo="Don Quijote y Sancho Panza" data-desc="El caballero y su escudero cruzan un paisaje de molinos, entre atmósferas de luz y tierra." aria-label="Ver en grande: Don Quijote y Sancho Panza">
+              <span class="frame v-quijote"><span class="crop"><img src="assets/img/obra-quijote-sancho.jpg" width="1204" height="1600" alt="Pintura de Don Quijote a caballo y Sancho Panza con su burro, con un molino al fondo" loading="lazy" decoding="async"></span></span>
+            </button>
+            <figcaption><b>Don Quijote y Sancho Panza</b><span>Ma. Alicia González Garza</span></figcaption>
+          </figure>
+
+          <figure class="work work--6 rv" style="--d:.1" data-tilt>
+            <button class="work__btn" type="button" data-obra="maiz" data-titulo="Maíz en movimiento" data-desc="Mazorcas y hojas que parecen volar, con relieve y calidez dorada." aria-label="Ver en grande: Maíz en movimiento">
+              <span class="frame v-maiz"><span class="crop"><img src="assets/img/obra-maiz.jpg" width="1600" height="1204" alt="Pintura de mazorcas de maíz con hojas doradas en movimiento sobre un fondo durazno" loading="lazy" decoding="async"></span></span>
+            </button>
+            <figcaption><b>Maíz en movimiento</b><span>Ma. Alicia González Garza</span></figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 7. RECORRIDO 360° (carrusel 3D) ============ -->
+    <section class="section night recorrido" id="recorrido" aria-labelledby="recorrido-t">
+      <canvas class="dust" id="dustNight" aria-hidden="true"></canvas>
+      <div class="container recorrido__inner">
+        <p class="eyebrow eyebrow--gold rv">Recorrido 360°</p>
+        <h2 class="h2 rv" id="recorrido-t" style="--d:.08">Gira la sala.<br><em>La obra te rodea.</em></h2>
+        <p class="lead rv" style="--d:.16">Arrastra para recorrer la exhibición. Toca una pintura para entrar en ella.</p>
+      </div>
+
+      <div class="orbit" data-orbit role="group" aria-label="Carrusel 3D de obras: arrastra para girar">
+        <div class="orbit__ring">
+          <figure class="orbit__item"><button type="button" data-obra="cosmos" aria-label="Ver en grande: Escalera de luz"><span class="frame v-cosmos"><span class="crop"><img src="assets/img/obra-cosmos-escalera.jpg" width="1465" height="762" alt="Pintura de una galaxia en espiral sobre un campo de llamas con una escalera dorada" loading="lazy" decoding="async" draggable="false"></span></span></button></figure>
+          <figure class="orbit__item"><button type="button" data-obra="ola" aria-label="Ver en grande: Ola azul"><span class="frame v-ola"><span class="crop"><img src="assets/img/obra-ola-azul.jpg" width="1493" height="1026" alt="Pintura abstracta de una ola azul que forma un túnel de luz" loading="lazy" decoding="async" draggable="false"></span></span></button></figure>
+          <figure class="orbit__item"><button type="button" data-obra="bodegon" aria-label="Ver en grande: Bodegón de flores y luz"><span class="frame v-bodegon"><span class="crop"><img src="assets/img/obra-bodegon-flores.jpg" width="1189" height="1423" alt="Bodegón de flores naranjas y amarillas en un jarrón azul" loading="lazy" decoding="async" draggable="false"></span></span></button></figure>
+          <figure class="orbit__item"><button type="button" data-obra="quijote" aria-label="Ver en grande: Don Quijote y Sancho Panza"><span class="frame v-quijote"><span class="crop"><img src="assets/img/obra-quijote-sancho.jpg" width="1204" height="1600" alt="Pintura de Don Quijote a caballo y Sancho Panza con su burro" loading="lazy" decoding="async" draggable="false"></span></span></button></figure>
+          <figure class="orbit__item"><button type="button" data-obra="virgen" aria-label="Ver en grande: Aparición en el desierto"><span class="frame v-virgen"><span class="crop"><img src="assets/img/obra-virgen-desierto.jpg" width="1204" height="1600" alt="Pintura de una figura con manto turquesa junto a un hombre arrodillado y un nopal" loading="lazy" decoding="async" draggable="false"></span></span></button></figure>
+          <figure class="orbit__item"><button type="button" data-obra="maiz" aria-label="Ver en grande: Maíz en movimiento"><span class="frame v-maiz"><span class="crop"><img src="assets/img/obra-maiz.jpg" width="1600" height="1204" alt="Pintura de mazorcas de maíz con hojas doradas en movimiento" loading="lazy" decoding="async" draggable="false"></span></span></button></figure>
+        </div>
+      </div>
+
+      <div class="container recorrido__foot">
+        <ul class="bignums">
+          <li class="rv"><b><span data-count="40">40</span></b><span>años de trayectoria</span></li>
+          <li class="rv" style="--d:.1"><b><span data-count="400">400</span></b><span>obras pintadas</span></li>
+          <li class="rv" style="--d:.2"><b>1</b><span>exhibición permanente</span></li>
+        </ul>
+        <div class="rv">
+          <a class="btn btn--gold" href="#contacto" data-wa="Hola, vi las obras de la Galería Angélica Villarreal en su página y quiero verlas de cerca. ¿Cómo coordino mi visita?">Quiero ver estas obras de cerca</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 8. VISITA ============ -->
+    <section class="section visit" id="visita" aria-labelledby="visita-t">
+      <div class="container">
+        <header class="visit__head">
+          <p class="eyebrow rv">Tu visita</p>
+          <h2 class="h2 rv" id="visita-t" style="--d:.08">Entrar a la sala<br>es más fácil de lo que <em>imaginas.</em></h2>
+        </header>
+
+        <ol class="steps" data-steps>
+          <li class="step">
+            <span class="step__n" aria-hidden="true">01</span>
+            <h3>Escríbenos</h3>
+            <p>Cuéntanos qué obra o serie te llamó la atención y cuándo te gustaría venir.</p>
+          </li>
+          <li class="step">
+            <span class="step__n" aria-hidden="true">02</span>
+            <h3>Elige tu momento</h3>
+            <p>Coordinamos contigo el día y la hora para que recorras la exhibición con calma.</p>
+          </li>
+          <li class="step">
+            <span class="step__n" aria-hidden="true">03</span>
+            <h3>Recorre la sala</h3>
+            <p>Entra a la exhibición permanente en San Buenaventura, Coahuila, y mira cada obra de cerca.</p>
+          </li>
+          <span class="steps__line" aria-hidden="true"><i></i></span>
+        </ol>
+
+        <div class="place rv">
+          <div class="place__map" aria-hidden="true">
+            <svg viewBox="0 0 400 240" focusable="false">
+              <defs><pattern id="mapgrid" width="28" height="28" patternUnits="userSpaceOnUse"><path d="M28 0H0V28" fill="none" stroke="#C9922E" stroke-opacity=".25" stroke-width="1"/></pattern></defs>
+              <rect width="400" height="240" fill="url(#mapgrid)"/>
+              <path d="M-10 170C80 150 140 190 220 150S350 110 410 130" fill="none" stroke="#C9922E" stroke-opacity=".5" stroke-width="10" stroke-linecap="round"/>
+              <path d="M90 -10C110 60 150 90 170 250" fill="none" stroke="#C9922E" stroke-opacity=".35" stroke-width="6" stroke-linecap="round"/>
+              <circle class="pin__pulse" cx="238" cy="132" r="14" fill="#C9922E"/>
+              <circle class="pin__pulse pin__pulse--b" cx="238" cy="132" r="14" fill="#C9922E"/>
+              <circle cx="238" cy="132" r="8" fill="#8F6118"/>
+              <circle cx="238" cy="132" r="3" fill="#F7F2E6"/>
+            </svg>
+          </div>
+          <div class="place__info">
+            <p class="eyebrow">Dónde estamos</p>
+            <h3>San Buenaventura,<br>Coahuila, México</h3>
+            <p>Galería de Arte Angélica Villarreal · Exhibición permanente de la artista Ma. Alicia González Garza.</p>
+            <a class="btn btn--dark" href="https://www.google.com/maps/search/?api=1&amp;query=Galer%C3%ADa+Ang%C3%A9lica+Villarreal+San+Buenaventura+Coahuila" target="_blank" rel="noopener">Quiero llegar a la galería</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 9. PREGUNTAS FRECUENTES ============ -->
+    <section class="section faq" id="preguntas" aria-labelledby="faq-t">
+      <div class="container faq__grid">
+        <div class="faq__intro">
+          <p class="eyebrow rv">Antes de venir</p>
+          <h2 class="h2 rv" id="faq-t" style="--d:.08">Preguntas que <em>sí nos hacen.</em></h2>
+        </div>
+        <div class="faq__list">
+          <details class="faq__item rv">
+            <summary>¿Dónde está la galería?</summary>
+            <div class="faq__a"><p>En San Buenaventura, Coahuila, México. Usa la sección de contacto para coordinar tu visita y que te orientemos para llegar.</p></div>
+          </details>
+          <details class="faq__item rv" style="--d:.05">
+            <summary>¿La exhibición es permanente?</summary>
+            <div class="faq__a"><p>Sí. Es una exhibición permanente de la obra de Ma. Alicia González Garza, quien lleva 40 años pintando y ha creado 400 obras.</p></div>
+          </details>
+          <details class="faq__item rv" style="--d:.1">
+            <summary>¿Qué series puedo conocer?</summary>
+            <div class="faq__a"><p>Viacrucis, Flor del desierto, Van Gogh (representación de obras del maestro), Bodegones, Abstracto y Sacro.</p></div>
+          </details>
+          <details class="faq__item rv" style="--d:.15">
+            <summary>¿Cómo pregunto por una obra o su valor?</summary>
+            <div class="faq__a"><p>Escríbenos indicando el nombre de la obra o la serie que te interesó. Te damos la información directamente, sin compromiso.</p></div>
+          </details>
+          <details class="faq__item rv" style="--d:.2">
+            <summary>¿Necesito avisar antes de visitarla?</summary>
+            <div class="faq__a"><p>Para que tu recorrido sea tranquilo, te recomendamos coordinarlo con nosotros antes de venir.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 10. CONTACTO ============ -->
+    <section class="section night contact" id="contacto" aria-labelledby="contacto-t">
+      <div class="contact__glow" aria-hidden="true"></div>
+      <div class="container contact__grid">
+        <div class="contact__copy">
+          <p class="eyebrow eyebrow--gold rv">Contacto</p>
+          <h2 class="h2 rv" id="contacto-t" style="--d:.08">¿Listo para entrar <em>a la sala?</em></h2>
+          <p class="lead rv" style="--d:.16">Cuéntanos qué obra o serie te llamó la atención. Te respondemos por WhatsApp para coordinar tu visita.</p>
+          <ul class="contact__list rv" style="--d:.24">
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Zm0-9a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>San Buenaventura, Coahuila, México</li>
+            <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20 20 4M9 4h11v11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Exhibición permanente de Ma. Alicia González Garza</li>
+          </ul>
+        </div>
+
+        <div class="contact__card rv" style="--d:.12">
+          <!-- Se muestra mientras el negocio no entregue su número de WhatsApp -->
+          <div class="form-aviso">
+            <p class="form-aviso__t">Estamos activando nuestro canal directo.</p>
+            <p>Muy pronto podrás escribirnos por WhatsApp desde aquí. Mientras tanto, te esperamos en la exhibición permanente, en San Buenaventura, Coahuila.</p>
+          </div>
+
+          <form class="contact-form" id="formContacto" action="#contacto" novalidate>
+            <div class="field">
+              <label for="f-nombre">Tu nombre</label>
+              <input id="f-nombre" name="nombre" type="text" autocomplete="name" placeholder="¿Cómo te llamas?" required>
+            </div>
+            <div class="field">
+              <label for="f-interes">¿Qué te gustaría?</label>
+              <select id="f-interes" name="interes">
+                <option>Quiero visitar la exhibición permanente</option>
+                <option>Quiero conocer una obra en particular</option>
+                <option>Me interesa una de las series</option>
+                <option>Tengo otra pregunta</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="f-mensaje">Cuéntanos más <span>(opcional)</span></label>
+              <textarea id="f-mensaje" name="mensaje" rows="3" placeholder="Nombre de la obra, serie, fecha que te acomoda…"></textarea>
+            </div>
+            <button class="btn btn--gold btn--block" type="submit">
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.23-.16-.48-.29Z"/></svg>
+              Enviar mi mensaje por WhatsApp
+            </button>
+            <p class="form__note">Se abrirá WhatsApp con tu mensaje ya escrito.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ PIE ============ -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <img class="footer__logo" src="assets/img/logo-dorado.jpg" width="1408" height="768" alt="Logotipo de Angélica Villarreal, Galería de Arte, San Buenaventura, Coahuila, México" loading="lazy" decoding="async">
+      </div>
+      <nav class="footer__nav" aria-label="Pie de página">
+        <p class="eyebrow eyebrow--gold">Explora</p>
+        <ul>
+          <li><a href="#galeria">La galería</a></li>
+          <li><a href="#artista">La artista</a></li>
+          <li><a href="#series">Series</a></li>
+          <li><a href="#obras">Obras</a></li>
+          <li><a href="#visita">Visita</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+      <div class="footer__info">
+        <p class="eyebrow eyebrow--gold">Ubicación</p>
+        <p>San Buenaventura,<br>Coahuila, México</p>
+        <p class="footer__small">Exhibición permanente de la artista Ma. Alicia González Garza.</p>
+      </div>
+    </div>
+    <p class="footer__legal container">© <span id="anio">2026</span> Galería de Arte Angélica Villarreal. Todas las obras pertenecen a la artista Ma. Alicia González Garza.</p>
+  </footer>
+
+  <!-- Botón flotante de WhatsApp (se muestra solo si hay número configurado en script.js) -->
+  <a class="wa-float" id="waFloat" href="#contacto" data-wa="Hola, me gustaría recibir información de la Galería Angélica Villarreal." aria-label="Escribir por WhatsApp a la galería">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2Zm0 18.15h-.01a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.7 8.23-8.24 8.23Zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.78.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.12-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.85-.86 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.23-.16-.48-.29Z"/></svg>
+  </a>
+
+  <!-- ============ VISOR DE OBRA (lightbox) ============ -->
+  <div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de obra" hidden>
+    <button class="lb__close" type="button" data-lb-close aria-label="Cerrar visor">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5 5 19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <button class="lb__nav lb__nav--prev" type="button" data-lb-prev aria-label="Obra anterior">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="lb__stage" id="lbStage"></div>
+    <button class="lb__nav lb__nav--next" type="button" data-lb-next aria-label="Obra siguiente">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div class="lb__info">
+      <p class="lb__title" id="lbTitle"></p>
+      <p class="lb__meta" id="lbMeta"></p>
+      <a class="btn btn--gold btn--sm" id="lbCta" href="#contacto" data-lb-close>Quiero saber de esta obra</a>
+    </div>
+  </div>
+</body>
+</html>
