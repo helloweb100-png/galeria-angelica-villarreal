@@ -439,6 +439,61 @@ html.menu-open .nav { visibility: visible; clip-path: circle(150% at calc(100% -
 .work figcaption b { font: 600 1.25rem/1.2 var(--f-serif); }
 .work figcaption span { font: 400 .62rem/1.4 var(--f-display); letter-spacing: .2em; text-transform: uppercase; color: var(--gold-3); }
 
+/* ---------- 16b. Apariciones (secuencia) y obras diversas ---------- */
+/* Estas obras ya vienen recortadas al lienzo desde el archivo de imagen: solo necesitan su proporción (ancho / alto). */
+.v-aparicion   { --arn: .8056; }
+.v-rosas       { --arn: .7564; }
+.v-tilma       { --arn: .691; }
+.v-perpetuo    { --arn: .9121; }
+.v-caballo     { --arn: .75; }
+.v-madre-azul  { --arn: .8; }
+.v-angel       { --arn: .7498; }
+.v-gallo       { --arn: .9704; }
+.v-madre-luz   { --arn: .7211; }
+.v-familia     { --arn: 1.1512; }
+.v-cruz        { --arn: .7; }
+
+/* Apariciones: una secuencia I → II → III. En móvil baja por una línea dorada; en pantalla ancha avanza de izquierda a derecha. */
+.apariciones .container { position: relative; }
+.apar__head { max-width: 760px; }
+.apar__seq { --ah: clamp(300px, 52vh, 560px); position: relative; display: grid; gap: 3.4rem; margin-top: clamp(2.5rem, 6vw, 4.5rem); padding-left: 2.6rem; list-style: none; }
+.apar__seq::before { content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 2px; background: linear-gradient(180deg, var(--gold-2), var(--gold-3)); opacity: .75; }
+.apar { position: relative; display: grid; gap: 1.1rem; }
+.apar__n {
+  position: absolute; left: -2.6rem; top: 0; z-index: 2; width: 38px; height: 38px; margin-left: -19px; display: grid; place-items: center;
+  border-radius: 50%; border: 1.5px solid var(--gold); background: var(--night); font: 600 .8rem/1 var(--f-display); letter-spacing: .04em; color: var(--gold-2);
+}
+.apar__fig { margin: 0; display: grid; gap: 1.1rem; }
+.apar__art .frame { width: min(100%, 380px); }
+.apar figcaption { display: grid; gap: .35rem; }
+.apar figcaption b { font: 600 1.35rem/1.2 var(--f-serif); }
+.apar figcaption span { font: 400 .62rem/1.4 var(--f-display); letter-spacing: .2em; text-transform: uppercase; color: var(--gold-2); }
+.apar figcaption p { margin-top: .3rem; max-width: 38ch; font-weight: 300; font-size: .96rem; line-height: 1.55; color: rgba(241, 233, 216, .78); }
+
+/* Obras diversas: columnas tipo muro de galería (cada obra conserva su proporción) */
+.diversas { background: var(--ivory-2); }
+.diversas::before { content: ""; position: absolute; inset: 0; background: var(--grain); opacity: .3; mix-blend-mode: multiply; pointer-events: none; }
+.diversas .container { position: relative; }
+.div__grid { columns: 2; column-gap: clamp(1rem, 3vw, 2rem); margin-top: clamp(2.5rem, 6vw, 4.5rem); }
+.div__item { margin: 0 0 clamp(1.6rem, 4vw, 2.6rem); display: grid; gap: .8rem; break-inside: avoid; }
+.div__item .frame { width: 100%; }
+.div__item figcaption { font: 600 1.05rem/1.25 var(--f-serif); }
+
+@media (min-width: 700px) {
+  .div__grid { columns: 3; }
+}
+@media (min-width: 960px) {
+  .apar__seq { grid-auto-flow: column; grid-auto-columns: 1fr; gap: 2.6rem; padding: 4.6rem 0 0; }
+  .apar__seq::before { left: 0; right: 0; top: 19px; bottom: auto; width: auto; height: 2px; background: linear-gradient(90deg, var(--gold-2), var(--gold-3)); }
+  .apar__n { left: 0; top: -4.6rem; margin-left: 0; }
+  .apar:not(:last-child)::after { content: ""; position: absolute; top: calc(-4.6rem + 15px); right: calc(-1.3rem - 5px); z-index: 2; width: 10px; height: 10px; border-top: 2px solid var(--gold-2); border-right: 2px solid var(--gold-2); rotate: 45deg; }
+  .apar__art { height: var(--ah); display: grid; align-items: end; }
+  .apar__art .frame { width: min(100%, calc(var(--ah) * var(--arn))); }
+}
+@media (min-width: 1100px) {
+  .div__grid { columns: 4; }
+}
+
 /* ---------- 17. Recorrido 360° ---------- */
 .recorrido { overflow: clip; }
 .recorrido .dust { z-index: 0; }

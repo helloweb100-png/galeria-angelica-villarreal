@@ -518,7 +518,7 @@
     const tTitle = $('#lbTitle');
     const tMeta = $('#lbMeta');
     const cta = $('#lbCta');
-    const grid = $$('#obras [data-obra]');
+    const grid = $$('#obras [data-obra], #apariciones [data-obra], #diversas [data-obra]');
     const ids = grid.map(function (b) { return b.dataset.obra; });
     let actual = 0, ultimo = null, timer = 0, sx = 0;
 
