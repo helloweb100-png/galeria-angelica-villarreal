@@ -452,6 +452,8 @@ html.menu-open .nav { visibility: visible; clip-path: circle(150% at calc(100% -
 .v-madre-luz   { --arn: .7211; }
 .v-familia     { --arn: 1.1512; }
 .v-cruz        { --arn: .7; }
+.v-arboles     { --arn: 1.9802; }
+.v-cordero     { --arn: 1.3461; }
 
 /* Apariciones: una secuencia I → II → III. En móvil baja por una línea dorada; en pantalla ancha avanza de izquierda a derecha. */
 .apariciones .container { position: relative; }
