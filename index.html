@@ -318,6 +318,7 @@
           <!-- I · Viacrucis -->
           <article class="card" aria-labelledby="s-via">
             <div class="card__art">
+              <button class="art-btn" type="button" data-coleccion="viacrucis" aria-label="Ver la colección: Viacrucis, 15 estaciones">
               <span class="frame" style="--arn:.8">
                 <svg class="art" viewBox="0 0 400 500" role="img" aria-label="Composición gráfica de la serie Viacrucis: un camino punteado dorado sube hacia una cruz luminosa sobre un cielo rojo oscuro">
                   <defs>
@@ -347,10 +348,12 @@
                   <rect x="146" y="120" width="108" height="16" fill="url(#gv-gold)"/>
                 </svg>
               </span>
+              </button>
             </div>
             <div class="card__body">
               <h3 id="s-via"><span class="card__num" aria-hidden="true">I</span>Viacrucis</h3>
               <p>Estación por estación, el camino del Viacrucis llevado al lienzo con toda la intensidad del pincel.</p>
+              <button class="link-arrow" type="button" data-coleccion="viacrucis">Ver las 15 estaciones</button>
               <a class="link-arrow" href="#contacto" data-wa="Hola, me interesa la serie Viacrucis de la Galería Angélica Villarreal. ¿Me comparten información?">Quiero conocer esta serie</a>
             </div>
           </article>
@@ -358,6 +361,7 @@
           <!-- II · Flor del desierto -->
           <article class="card" aria-labelledby="s-flor">
             <div class="card__art">
+              <button class="art-btn" type="button" data-coleccion="flor" aria-label="Ver la colección: Flor del desierto, 31 obras">
               <span class="frame" style="--arn:.8">
                 <svg class="art" viewBox="0 0 400 500" role="img" aria-label="Composición gráfica de la serie Flor del desierto: una flor de pétalos rosados y dorados frente a un sol y dunas al atardecer">
                   <defs>
@@ -398,10 +402,12 @@
                   </g>
                 </svg>
               </span>
+              </button>
             </div>
             <div class="card__body">
               <h3 id="s-flor"><span class="card__num" aria-hidden="true">II</span>Flor del desierto</h3>
               <p>El desierto también florece: color, espina y luz en una colección que huele a tierra caliente.</p>
+              <button class="link-arrow" type="button" data-coleccion="flor">Ver las 31 obras</button>
               <a class="link-arrow" href="#contacto" data-wa="Hola, me interesa la colección Flor del desierto de la Galería Angélica Villarreal. ¿Me comparten información?">Quiero conocer esta serie</a>
             </div>
           </article>
@@ -409,6 +415,7 @@
           <!-- III · Van Gogh -->
           <article class="card" aria-labelledby="s-vg">
             <div class="card__art">
+              <button class="art-btn" type="button" data-coleccion="vangogh" aria-label="Ver la colección: Van Gogh, 30 obras">
               <span class="frame" style="--arn:.8">
                 <svg class="art" viewBox="0 0 400 500" role="img" aria-label="Composición gráfica de la serie Van Gogh: remolinos amarillos y azules sobre un cielo nocturno con estrellas y una luna creciente">
                   <defs>
@@ -442,10 +449,12 @@
                   <path d="M0 500V455C80 430 160 470 240 452S350 440 400 462V500Z" fill="#0a1426"/>
                 </svg>
               </span>
+              </button>
             </div>
             <div class="card__body">
               <h3 id="s-vg"><span class="card__num" aria-hidden="true">III</span>Van Gogh</h3>
               <p>Representación de obras de Vincent van Gogh: la artista conversa con el maestro, pincelada a pincelada.</p>
+              <button class="link-arrow" type="button" data-coleccion="vangogh">Ver las 30 obras</button>
               <a class="link-arrow" href="#contacto" data-wa="Hola, me interesa la serie de representación de obras de Van Gogh de la Galería Angélica Villarreal. ¿Me comparten información?">Quiero conocer esta serie</a>
             </div>
           </article>
@@ -575,6 +584,18 @@
             <span class="apar__n" aria-hidden="true">I</span>
             <figure class="apar__fig" data-tilt>
               <div class="apar__art">
+                <button class="work__btn" type="button" data-obra="aparicion-desierto" data-titulo="Aparición en el desierto" data-desc="Una figura de manto turquesa y un hombre arrodillado junto al nopal, bajo un sol de espirales naranjas." aria-label="Ver en grande: Aparición en el desierto">
+                  <span class="frame v-virgen"><span class="crop"><img src="assets/img/obra-virgen-desierto.jpg" width="1204" height="1600" alt="Pintura de una figura con manto turquesa y vestido rosa junto a un hombre arrodillado y un nopal, bajo un sol de espirales naranjas" loading="lazy" decoding="async"></span></span>
+                </button>
+              </div>
+              <figcaption><b>Aparición en el desierto</b><span>Ma. Alicia González Garza</span><p>Una figura de manto turquesa y un hombre arrodillado junto al nopal, bajo un sol de espirales naranjas.</p></figcaption>
+            </figure>
+          </li>
+
+          <li class="apar rv" style="--d:.12">
+            <span class="apar__n" aria-hidden="true">II</span>
+            <figure class="apar__fig" data-tilt>
+              <div class="apar__art">
                 <button class="work__btn" type="button" data-obra="aparicion-1" data-titulo="La Virgen se aparece a Juan Diego" data-desc="Juan Diego levanta la mirada, apoyado en su bastón, hacia la Virgen que aparece entre nubes y una luz amarilla." aria-label="Ver en grande: La Virgen se aparece a Juan Diego">
                   <span class="frame v-aparicion"><span class="crop"><img src="assets/img/obra-guadalupe-aparicion.jpg" width="1160" height="1440" alt="Pintura de Juan Diego agachado sobre la tierra, con su bastón, mirando hacia la Virgen de Guadalupe que aparece entre nubes bajo una luz amarilla" loading="lazy" decoding="async"></span></span>
                 </button>
@@ -583,8 +604,8 @@
             </figure>
           </li>
 
-          <li class="apar rv" style="--d:.12">
-            <span class="apar__n" aria-hidden="true">II</span>
+          <li class="apar rv" style="--d:.24">
+            <span class="apar__n" aria-hidden="true">III</span>
             <figure class="apar__fig" data-tilt>
               <div class="apar__art">
                 <button class="work__btn" type="button" data-obra="aparicion-2" data-titulo="La Virgen y las rosas" data-desc="La Virgen de manto estrellado, rodeada de luz dorada, extiende la mano hacia las rosas que Juan Diego guarda en su tilma." aria-label="Ver en grande: La Virgen y las rosas">
@@ -595,8 +616,8 @@
             </figure>
           </li>
 
-          <li class="apar rv" style="--d:.24">
-            <span class="apar__n" aria-hidden="true">III</span>
+          <li class="apar rv" style="--d:.36">
+            <span class="apar__n" aria-hidden="true">IV</span>
             <figure class="apar__fig" data-tilt>
               <div class="apar__art">
                 <button class="work__btn" type="button" data-obra="aparicion-3" data-titulo="La imagen en la tilma" data-desc="Juan Diego muestra su tilma, donde aparece la imagen de la Virgen entre rosas, ante un obispo arrodillado." aria-label="Ver en grande: La imagen en la tilma">

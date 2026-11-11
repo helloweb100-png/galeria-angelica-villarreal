@@ -124,6 +124,9 @@ section[id], footer[id] { scroll-margin-top: calc(var(--header-h) - 8px); }
 }
 .link-arrow::after { content: "→"; transition: translate .4s var(--ease); }
 .link-arrow:hover { gap: 1rem; border-color: var(--gold-2); }
+/* Mismo aspecto de enlace, pero como botón (abre una colección en el visor) */
+button.link-arrow { padding: 0 0 .35rem; background: none; border: 0; border-bottom: 1px solid rgba(230, 182, 97, .4); }
+button.link-arrow:hover { border-bottom-color: var(--gold-2); }
 
 /* ---------- 4. Barra de progreso, cursor ---------- */
 .progress {

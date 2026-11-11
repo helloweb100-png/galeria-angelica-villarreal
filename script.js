@@ -494,7 +494,7 @@
       x = e.clientX; y = e.clientY;
       c.classList.add('on');
       const t = e.target;
-      const ver = t && t.closest ? t.closest('[data-obra], [data-orbit]') : null;
+      const ver = t && t.closest ? t.closest('[data-obra], [data-coleccion], [data-orbit]') : null;
       const enlace = t && t.closest ? t.closest('a, button, summary, input, select, textarea') : null;
       c.classList.toggle('is-view', !!ver);
       c.classList.toggle('is-link', !ver && !!enlace);
@@ -509,6 +509,29 @@
   }
 
   /* ======================================================================
+     COLECCIONES: series completas que se recorren en el visor.
+     Cada foto es [archivo sin extensión, ancho, alto] y el orden es el de recorrido
+     (en el Viacrucis, el de las estaciones: la 1.ª foto es la Estación 1, y así sucesivamente).
+     ====================================================================== */
+  const COLECCIONES = {
+    viacrucis: {
+      titulo: 'Viacrucis', etiqueta: 'Estación', ruta: 'assets/img/colecciones/viacrucis/',
+      desc: 'Estación por estación, el camino del Viacrucis llevado al lienzo con toda la intensidad del pincel.',
+      fotos: [['01',840,1400],['02',830,1400],['03',829,1400],['04',847,1400],['05',826,1400],['06',823,1400],['07',828,1400],['08',832,1400],['09',803,1400],['10',809,1400],['11',836,1400],['12',826,1400],['13',838,1400],['14',855,1400],['15',827,1400]]
+    },
+    flor: {
+      titulo: 'Flor del desierto', ruta: 'assets/img/colecciones/flor-del-desierto/',
+      desc: 'El desierto también florece: color, espina y luz en una colección que huele a tierra caliente.',
+      fotos: [['01',1123,1400],['02',930,1400],['03',1056,1400],['04',1059,1400],['05',1049,1400],['06',1053,1400],['07',929,1400],['08',1053,1400],['09',1044,1400],['10',844,1400],['11',844,1400],['12',703,1400],['13',974,1400],['14',702,1400],['15',975,1400],['16',685,1400],['17',938,1400],['18',941,1400],['19',919,1400],['20',1060,1400],['21',696,1400],['22',703,1400],['23',1078,1400],['24',923,1400],['25',916,1400],['26',926,1400],['27',930,1400],['28',907,1400],['29',915,1400],['30',919,1400],['31',1049,1400]]
+    },
+    vangogh: {
+      titulo: 'Van Gogh', ruta: 'assets/img/colecciones/van-gogh/',
+      desc: 'Representación de obras de Vincent van Gogh: la artista conversa con el maestro, pincelada a pincelada.',
+      fotos: [['01',1038,1400],['02',1400,1168],['03',1400,1044],['04',1400,934],['05',1400,1120],['06',1400,704],['07',1117,1400],['08',1400,1117],['09',1117,1400],['10',1119,1400],['11',1165,1400],['12',1400,1162],['13',1400,1182],['14',758,1400],['15',886,1400],['16',695,1400],['17',1400,1173],['18',1161,1400],['19',1157,1400],['20',1400,1171],['21',1400,1159],['22',1400,1163],['23',1400,1109],['24',1400,1083],['25',1080,1400],['26',1400,1107],['27',1400,1097],['28',1400,1096],['29',1400,1099],['30',1400,1106]]
+    }
+  };
+
+  /* ======================================================================
      VISOR DE OBRA (lightbox) con navegación y mensaje de WhatsApp por obra
      ====================================================================== */
   function iniciarVisor() {
@@ -521,8 +544,9 @@
     const grid = $$('#obras [data-obra], #apariciones [data-obra], #diversas [data-obra]');
     const ids = grid.map(function (b) { return b.dataset.obra; });
     let actual = 0, ultimo = null, timer = 0, sx = 0;
+    let col = null;   // colección abierta (Viacrucis, Flor del desierto, Van Gogh); null si se mira una obra suelta
 
-    const pintar = function (i) {
+    const pintarObra = function (i) {
       actual = (i + ids.length) % ids.length;
       const src = grid[actual];
       const frame = $('.frame', src).cloneNode(true);
@@ -540,9 +564,56 @@
         cta.href = '#contacto'; cta.removeAttribute('target'); cta.removeAttribute('rel');
       }
     };
+    // Una foto de una colección: se arma al momento y solo se pide al servidor la que se está viendo (más la vecina)
+    const pintarColeccion = function (i) {
+      const n = col.fotos.length;
+      actual = (i + n) % n;
+      const f = col.fotos[actual];
+      const num = actual + 1;
+      const titulo = col.titulo + ' · ' + (col.etiqueta ? col.etiqueta + ' ' + num : num + ' de ' + n);
+      const frame = document.createElement('span');
+      frame.className = 'frame';
+      frame.style.setProperty('--arn', (f[1] / f[2]).toFixed(4));
+      const crop = document.createElement('span');
+      crop.className = 'crop';
+      const im = document.createElement('img');
+      im.src = col.ruta + f[0] + '.jpg';
+      im.width = f[1]; im.height = f[2];
+      im.alt = 'Pintura de la serie ' + col.titulo + (col.etiqueta ? ', ' + col.etiqueta.toLowerCase() + ' ' + num : ', obra ' + num + ' de ' + n);
+      im.decoding = 'async';
+      crop.appendChild(im);
+      frame.appendChild(crop);
+      stage.replaceChildren(frame);
+      stage.classList.remove('swap');
+      void stage.offsetWidth;
+      stage.classList.add('swap');
+      tTitle.textContent = titulo;
+      tMeta.textContent = col.desc;
+      if (HAS_WA) {
+        cta.href = waUrl('Hola, me interesa la obra “' + titulo + '” que vi en la página de la ' + NEGOCIO + '. ¿Me comparten información?');
+        cta.target = '_blank'; cta.rel = 'noopener';
+      } else {
+        cta.href = '#contacto'; cta.removeAttribute('target'); cta.removeAttribute('rel');
+      }
+      [actual + 1, actual - 1].forEach(function (j) { const g = col.fotos[(j + n) % n]; new Image().src = col.ruta + g[0] + '.jpg'; });
+    };
+    const pintar = function (i) { if (col) { pintarColeccion(i); } else { pintarObra(i); } };
+    const abrirColeccion = function (id, trigger) {
+      if (!COLECCIONES[id]) { return; }
+      clearTimeout(timer);
+      col = COLECCIONES[id];
+      ultimo = trigger || document.activeElement;
+      pintar(0);
+      lb.hidden = false;
+      requestAnimationFrame(function () { lb.classList.add('open'); });
+      doc.classList.add('lb-open');
+      const cerrarBtn = $('.lb__close', lb);
+      if (cerrarBtn) { cerrarBtn.focus(); }
+    };
     const abrir = function (id, trigger) {
       const i = ids.indexOf(id);
       if (i < 0) { return; }
+      col = null;
       clearTimeout(timer);
       ultimo = trigger || document.activeElement;
       pintar(i);
@@ -563,6 +634,8 @@
     document.addEventListener('click', function (e) {
       const t = e.target;
       if (!t || !t.closest) { return; }
+      const dispCol = t.closest('[data-coleccion]');
+      if (dispCol && !lb.contains(dispCol)) { e.preventDefault(); abrirColeccion(dispCol.dataset.coleccion, dispCol); return; }
       const disp = t.closest('[data-obra]');
       if (disp && !lb.contains(disp)) { e.preventDefault(); abrir(disp.dataset.obra, disp); return; }
       if (t.closest('[data-lb-close]') || t === lb || t === stage) { cerrar(); return; }
